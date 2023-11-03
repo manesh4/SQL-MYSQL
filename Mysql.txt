@@ -1,0 +1,216 @@
+creating database
+
+create database database_name;
+
+create database db123;
+
+-- create table test2.person
+-- (
+-- 	personid int,
+--     fname varchar(255),
+--     lname varchar(255),
+--     city varchar(255),
+--     salary int
+-- );
+
+-- select * from test2.person
+
+-- insert into test2.person
+-- (personid,fname,lname,city,salary)
+-- values
+-- (6,"ritesh","deshmukh","mumbai",45000);
+
+
+-- insert into test2.person
+-- (personid,fname,lname,city,salary)
+-- values
+-- (2,"yash","desai","kolhapur",52000),
+-- (3,"prasad","patil","sangli",30000),
+-- (4,"nita","chouhan","mumbai",60000),
+-- (5,"raj","singhaniya","pune",42000);
+
+-- select * from test2.person where 
+-- fname = "yash" and lname = "desai";
+
+-- select * from test2.person where 
+-- fname = "yash" or lname = "singhaniya";
+
+-- select * from test2.person where 
+-- personid = 3
+
+-- select * from test2.person order by salary desc 
+
+-- select distinct(fname) from test2.person;
+
+
+
+-- delete from persons where p_id = 6;
+
+-- select now();
+-- select curtime();
+-- select curdate();
+
+-- select avg(salary) from person;
+-- select max(salary) from person;
+-- select min(salary) from person;
+-- select count(salary) from person;
+-- select sum(salary) from person;
+-- select round(avg(salary),2) from person;
+
+-- select ucase(fname),fname,lname from person;
+-- select lcase(lname),fname,lname from person;
+
+-- select lname,substr(fname,1,2) from person;
+
+-- create table orders
+-- (o_id int, orderprice int, customer varchar(255));
+
+-- insert into orders
+-- values
+-- (1,1200,"john"),
+-- (2,1500,"brown"),
+-- (3,300,"john"),
+-- (4,200,"taylor"),
+-- (5,1000,"john"),
+-- (6,2000,"maria"),
+-- (6,2000,"thomas"),
+-- (7,3000,"antonio"),
+-- (8,4000,"abcdf"),
+-- (9,5000,"kate");
+
+-- find the total sum(total order) from each customer
+
+-- select customer,sum(orderprice) from orders group by customer;
+
+
+-- use test2;
+
+-- alter table orders add location varchar(255);
+
+-- alter table orders drop location;
+-- alter table orders drop column location;
+
+-- drop table orders;
+
+
+-- drop database test2;
+
+-- use test;
+
+-- select * from orders where orderprice between 1000 and 1500;
+
+select * from orders where customer in("john","brown");
+
+select customer as cs from orders;
+
+select * from orders where customer like "j%";
+select * from orders where customer like "%n";
+select * from orders where customer like "%wn%";
+
+truncate table orders;
+
+-- set sql_safe_update = 0;
+
+-- update orders
+-- set orderprice = 1000
+-- where o_id = 4;
+
+
+
+
+-- create table persons(
+-- id int not null unique,
+-- personName varchar(255),
+-- location varchar(255)
+-- );
+
+-- error code
+-- insert into persons(personName,location)values("Raj","Pune");
+
+-- drop table orders;
+-- insert into persons(id,personName,location)values(1,"shubham","kolhapur");
+-- insert into persons(id,personName,location)values(2,"sudesh","pune");
+
+
+-- create table persons(
+-- id int not null unique,
+-- personName varchar(255),
+-- location varchar(255),
+-- age int,
+-- check(age>=18)
+-- );
+
+-- insert into persons(id,personName,location,age)values(1,"shubham","kolhapur",19);
+-- insert into persons(id,personName,location,age)values(2,"shubham","kolhapur",12);
+
+-- create table order2(
+-- order_id int primary key,
+-- ordernumber int,
+-- location varchar(255)
+-- );
+
+-- create table person2(
+-- person_id int,
+-- personname varchar(255),
+-- order_id int,
+-- foreign key(order_id) references order2(order_id)
+-- );
+
+
+
+-- insert into order2
+-- values
+-- (10,12345,"abc"),
+-- (20,12345,"abc"),
+-- (30,12345,"abc");
+
+insert into order2
+values
+(40,23456,"xyz");
+
+-- insert into person2
+-- values
+-- (3,"rajesh",30);
+
+insert into person2
+values
+(40,"dinesh",40);
+
+
+select persons.firstname, persons.lastname,orders.order_no from persons
+left join orders on persons.person_id = orders.person_id;
+
+select persons.firstname, persons.lastname,orders.order_no from persons
+right join orders on persons.person_id = orders.person_id;
+
+create table increment(
+p_id int primary key auto_increment,
+personname varchar(255),
+salary int
+)
+
+insert into increment(personname,salary)values("om",68000);
+
+TCl -> transaction control language
+
+select * from increment limit 3;
+
+set autocommit = 0;
+
+commit;
+
+delete from increment where p_id =3;
+rollback;
+
+savepoint upd1;
+savepoint upd2;
+
+rollback to upd1;
+
+
+-- provide permission to user
+-- grant select, update on increment to rahul
+
+-- revoke permission from user
+
+-- revoke select, update, delete on increment from rahul

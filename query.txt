@@ -1,0 +1,586 @@
+1.creating database
+
+create database database_name
+eg: create database testdb2
+
+2. create table --> create table statements is used to create a new table
+
+create table table_name
+(
+    column_name1 datatype constraints,
+    column_name2 datatype constraints,
+    column_name3 datatype constraints
+);
+
+
+3. insert values in table --> insert into statements is used to insert new record in table
+
+insert into table_name
+(column1,column2...etc)
+values
+(value1,value2.....etc)
+
+eg: 
+insert into customer
+(custid,custname,age,city,salary)
+values
+(3,'aam',24,'mumbai',25000),
+(4,'jam',25,'pune',35000);
+
+or 
+
+insert into customer
+values
+(5,'shyam',21,'Kolkatta',32000),
+(6,'dham',22,'Nashik',42000);
+
+4. update values in table
+
+update command is used to update existing Rows in a table
+
+update table_name
+set "column1" = "value1", column2 = value2
+where id = value
+
+eg: 
+update customer
+set custname = 'meena', age = 22
+where custid = 6;
+
+5. alter table
+alter table statements is used to add, delete, or modify Columns in an existing table
+
+1. add column syntax
+
+alter table table_name
+add column column_name 
+
+eg:
+alter table customer
+add column review int;
+
+2. Drop column syntax
+alter table table_name
+drop column column_name 
+
+eg:
+alter table customer
+drop column review;
+
+3.alter/modify column
+alter table table_name
+alter column column_name set data-type datatype
+
+
+6. Delete values in table
+delete from table_name where condition
+
+7. Drop table command --> deletes a table in the database 
+drop table table_name
+
+8. truncate table command --> deletes data inside a table, but not the table itself
+
+truncate table table_name
+
+
+9. Select statements: select data from table
+1. select column_name from table_name : select data from database
+2. select * from table_name : select all fields available in the table
+3. select distinct column_name from table_name: select unique fields available in the table
+
+
+10. where clause --> is used to filter record 
+it is used to extract only those records that fulfill a specified condition
+
+select column_name from table_name
+where condition
+
+operator:the sql reserved words and characters are called operators, which are used with a where clause in sql query
+1.arithmetic : +,-,*,/,%
+2.comparision : =, !=,<,>
+3.logical : all, in, between, like , and , or, not, any
+4. bitwise : and(&),or(|)
+
+
+11. Limit clause : is used to set an upper limit on the number of tuples returned by sql
+
+select column_name from table_name
+limit 5;
+
+12. order by clause
+is used to sort the result set in ascending(asc) or descending(desc) order
+
+select column_name from table_name
+orde by column_name asc
+
+import csv file or excel file
+1.
+create table customer2
+(
+	customer_id int8 primary key,
+	first_name varchar(50),
+	last_name varchar(50),
+	email varchar(100),
+	address_id int8
+);
+
+copy customer2(customer_id,first_name,last_name,email,address_id)
+from 'D:\my sql\SQL\customer.csv'
+delimiter ','
+csv header
+
+
+13. Functions In SQL 
+function in SQL are the database object that contains a set of sql statements to perform some specific
+task.
+
+types
+1. system definaed 
+round(),upper(),lower(),count(),sum(),avg(),max()...
+2.user definaed-- user can create function
+
+most used string Functions
+upper()
+lower()
+length()
+substring()
+concat()
+replace()
+trim()
+
+most used aggregate function
+this function performs a calculation on multiple values and return single value
+count()
+sum()
+max()
+min()
+round()
+avg()
+
+select upper(first_name),first_name from customer2
+
+select lower(first_name),first_name from customer2
+
+select substring(first_name,1,3),first_name from customer2
+
+select concat(first_name,last_name) as fullname,first_name,last_name from customer2
+
+select replace(first_name,'Mary','Mark') ,first_name,last_name from customer2
+
+select count(amount) from payment
+
+select max(amount) from payment
+
+select min(amount) from payment
+
+select avg(amount) from payment
+select round(avg(amount),2) from payment
+
+alter table payment
+alter column amount set data type int8
+
+select sum(amount) from payment
+
+14.Group by clause
+
+the Group by statements group rows that have the same value into rows.
+it is ofetn used with aggreegate function
+
+select column_name
+from table_name
+group by column_name
+
+eg:
+select mode, sum(amount) as total
+from payment
+group by mode
+
+
+15.having clause
+is used to apply filter on the result of group by based on the specified condition
+the where clause places condition on the selected column whereas the having clause
+places condition on groups created by group by clause
+
+select column_name
+from table_name
+where condition
+group by column_name
+having condition
+
+
+select mode, count(amount) as total
+from payment
+group by mode
+having count(amount)>=3
+order by total desc
+
+
+16.Timestamp
+is a data type used for values that contain both date & time.
+time: hh:mm:ss 
+date : yyyy-mm-dd 
+year : yyyy 
+timestamp : yyyy-mm-dd , hh:mm:ss 
+timestamptz --> date,time,time zone
+
+timestamp function
+1. show timezone
+2. select now()
+3. select timeofday
+4. select current_time
+5. select current_date
+
+17. extract function
+: extract a part from a given date value.
+
+select extract(month from date_filed) from table
+
+year,quarter,month,week,day,hour,minute, dow(day of week), doy(day of year)
+
+1. SELECT EXTRACT(month from payment_date) as month_payment,
+payment_date from payment
+
+2. SELECT EXTRACT(dow from payment_date) as month_payment,
+payment_date from payment
+
+18. SQL join
+
+join means to combine something
+a join clause is used to combine data from two or more tables based on a related column 
+between them.
+				-----------------------------------------
+				|										|
+customer		|			payment			address		|		country
+customer_id-----|----->	customer_id			address_id<---		city_id<------
+first_name		|		amount				address				city		|
+last_name		|		mode				city_id				country		|
+address_id------>|		payment_date		phone	|------------------------>|
+
+
+types of join
+1. inner join
+2. left join
+3. right join
+4. full join (full outer join)
+
+1. inner join  : return records that have matching values in both table
+x y 		x,y 
+1 1			1 1
+2 2			2 2
+3 4
+
+select column_name 
+from tableA 
+inner join tableB
+on tableA.column_name = tableB.column_name
+
+2. left join : return all records from the left table and the matched from the right table
+
+select column_name 
+from tableA 
+left join tableB
+on tableA.column_name = tableB.column_name
+
+3. right join
+return all records from the right table and the matched from the left table
+
+select column_name 
+from tableA 
+right join tableB
+on tableA.column_name = tableB.column_name
+
+4. full join (full outer join)
+
+return all record when there is a match in either left or right
+
+select column_name 
+from tableA 
+full outer join tableB
+on tableA.column_name = tableB.column_name
+
+
+
+19.self join 
+
+is a reguler join in which a table is joined to itself
+
+comparing values in a column of rows with the same table
+
+select column_name
+from table as t1
+join table as t2 
+on t1.column_name=t2.column_name
+
+eg:
+select t2.empname, t1.empname
+from emp_details as t1
+join emp_details as t2
+on t1.empid = t2.manager_id
+
+
+20. UNION : union clause is used to combine / concat the rsult of two or more
+select statements without returning duplicate rows.
+
+it must have
+1. the same number of column selected and expression
+2. the same data type
+3. have them in the same order
+
+
+create table custA
+(
+	cust_name char(30),
+	cust_amount int8
+)
+
+create table custB
+(
+	cust_name char(30),
+	cust_amount int8
+)
+
+
+
+insert into custA
+values
+('madan mohan',2100),
+('gopi nath',1200),
+('govind dev',5000);
+
+insert into custB
+values
+('Gopi Bhat',1500),
+('madan mohan',2100);
+
+
+syntax 
+select column_name from tableA
+union
+select column_name from tableB
+
+select cust_name,cust_amount from custA
+union 
+select cust_name,cust_amount from custB
+
+21. union all : is same as union with keep all records 
+select column_name from tableA
+union all
+select column_name from tableB
+
+22. SUB QUERY : a subquery or inner query or a nested query allows
+us to create complex query on the output of another query
+
+it also involves two select statements
+
+select column_name
+from table_name
+where column_name operator
+(select column_name from table_name where...)
+
+Question : find the detials of customer , whose payment
+amount is more than the average of total amount paid by all customer
+
+1. find the average amount
+2. filter the customer whiose amount > average amount
+
+-- 1. find the average amount
+select avg(amount) from payment
+
+-- 2. filter the customer whiose amount > average amount
+select *
+from payment
+where amount > 48
+
+select *
+from payment
+where amount > (select avg(amount) from payment)
+
+select customer_id, amount, mode
+from payment
+where customer_id in  (select customer_id from customer2)
+
+select first_name, last_name
+from customer2 c
+where exists (select customer_id,amount
+			  from payment p
+			 where p.customer_id = c.customer_id
+			 and amount >50)
+
+23. window function : it applies aggreegate, ranking , and analytic function
+over a particuler window(set of rows)
+
+and over clause is used with window function to define window
+
+syntax : 
+	select column_name,
+	fun(), over ([patition by clause]
+				[order by clause]
+				[row or range])
+	from table_name
+
+1. windows --> applies aggreegate, ranking , and analytic function over a particular window
+
+2.partition by--> divide the rows into partition 
+
+3. order by --> is used so that we can order the rows within each . optinal
+
+4. rows --> can be used if we want to further limit the rows . optinal
+
+1.aggregate function
+sum,avg,count,min,max
+2. ranking function
+row_number,rank, dense_rank, percent_rank
+3. valy/analytic function
+lead, lag, first_value, last_value
+
+create table test_data
+(
+	new_id numeric,
+	new_info char(10)
+)
+
+insert into test_data
+values
+(100,'pune'),
+(200,'pune'),
+(500,'kolhapur'),
+(700,'kolhapur'),
+(200,'Benglore'),
+(300,'Benglore'),
+(500,'Benglore');
+
+1.aggregate
+select new_id,new_info,
+sum(new_id)over(partition by new_info order by new_id) as "total",
+avg(new_id)over(partition by new_info order by new_id) as "average",
+count(new_id)over(partition by new_info order by new_id) as "count",
+min(new_id)over(partition by new_info order by new_id) as "min",
+max(new_id)over(partition by new_info order by new_id) as "max"
+from test_data
+
+2. 
+select new_id,new_info,
+sum(new_id)over(order by new_id rows between unbounded preceding and unbounded following) as "total",
+avg(new_id)over(order by new_id rows between unbounded preceding and unbounded following) as "average",
+count(new_id)over(order by new_id rows between unbounded preceding and unbounded following) as "count",
+min(new_id)over(order by new_id rows between unbounded preceding and unbounded following) as "min",
+max(new_id)over(order by new_id rows between unbounded preceding and unbounded following) as "max"
+from test_data
+
+3. ranking
+select new_id,
+row_number()over(order by new_id) as "row_number",
+rank()over(order by new_id) as "rank",
+dense_rank()over(order by new_id) as "dense_rank",
+percent_rank()over(order by new_id) as "percent_rank"
+from test_data
+
+4. value/analytic function
+select new_id,
+first_value(new_id)over(order by new_id) as "first_value",
+last_value(new_id)over(order by new_id) as "last_value",
+lead(new_id)over(order by new_id) as "lead",
+lag(new_id)over(order by new_id) as "lag"
+from test_data
+
+Question : offset the lead & lag values by 2 in the output column
+
+ans -->
+
+select new_id,
+lead(new_id,2)over(order by new_id) as "lead",
+lag(new_id,2)over(order by new_id) as "lag"
+from test_data
+
+24. Case expression : 
+
+the case expression goes through conditions & return a value when the first condition 
+is met . . if no condition are true it return the value in the else clause
+
+if there is no else part and no condition are true it return null. 
+
+case statment syntax : 
+
+case 
+	when condition1 then result1
+	when condition2 then result2
+	when condition3 then result3
+	else other_result
+	end;
+
+	select customer_id, amount,
+case
+	when amount>60 then 'expensive product'
+	when amount=50 then 'moderate product'
+	else 'inexpensive product'
+end as productStatus
+from payment
+
+
+Case expression
+
+case expression
+	when value1 then result1
+	when value2 then result2
+	when value3 then result3
+	else other_result
+	end;
+
+select customer_id,
+case amount
+	when 90 then 'primne customer'
+	when 50 then 'plus customer'
+	else 'reguler customer'
+end as customerStatus
+from payment
+
+25. CTE : Common Table Expression 
+
+a cte expression is a temporary named result set created from a simple select statements that can be used in a subsequent
+select statmeent 
+
+we can define cte by adding a with clause directly before select , insert , update, delete statements
+with clause can include one or more ctes sepereted by commas.
+
+1.CTE query
+with my_cte as (
+	select a,b,c
+	from table1
+)
+2. main query
+select a,c 
+from my_cte
+
+with my_cte as(
+	select * ,avg(amount) over (order by p.customer_id) as "average_price",
+	count(address_id) over (order by c.customer_id) as "count"
+	from payment as p
+	inner join customer2 as c
+	on p.customer_id = c.customer_id
+)
+select first_name,last_name,amount
+from my_cte
+
+select * from my_cte
+
+
+with my_cte as(
+	select * ,avg(amount) over (order by p.customer_id) as "average_price",
+	count(address_id) over (order by c.customer_id) as "count"
+	from payment as p
+	inner join customer2 as c
+	on p.customer_id = c.customer_id
+),
+my_ca as(
+	select *
+	from customer as c
+	inner join address as a
+	on a.address_id = c.address_id
+	inner join country as cc
+	on cc.city_id = a.city_id
+)
+select cp.first_name, cp.last_name, ca.city,ca.country,cp.amount
+from my_ca as ca, my_cte as cp
+
+
+

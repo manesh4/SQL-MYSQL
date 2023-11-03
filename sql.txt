@@ -1,0 +1,128 @@
+SQl --> structured query language... is a programing language used to interact with database.
+SQL Application
+* CRUD
+create , read , update, delete
+CRUD is an acronym for create,read(select), update, delete statements in SQL.
+
+SQL vs NoSQL
+
+Relational Database --->RDBMS  --> Relational database management system.
+1. SQL Database
+2. data stored in tables
+3. these database have fixed or static or predefined schema
+4. low performance with huge amount of data
+5. eg: PostgreSQL, MySQL, MS SQL Server
+
+Non-Relational Database
+1. NoSQL Database
+2. data stored either key value pairs, document-based, graph-baesd, wide column.
+3. they have dynamic schema
+4. easily work with huge volume of data
+5. Eg: MongoDB, Cassandra, Hbase
+
+SQL Commands
+there are mainly three types of sql Commands
+1. DDL(data defination language): create,alter,drop.
+2. DMl(data manipulation language): select, insert, update, delete
+3. DCL(data control language) : grant and revoke permission to user
+
+what is database?
+
+is a system that allows users to store and organize data.
+
+Excel vs Database
+
+Excel --> 
+1. easy to use-untrained person can work
+2. stored less amount of data
+3. good for one time analysis, quick charts
+4. no data integrity due to manual operation
+5. low search/ capabilities 
+
+Database
+1. Trained person can work
+2. store large amount of data
+3. can automate task
+4. high data integrity
+5. high search/capabilities
+
+SQL Databases
+
+1.teradaata
+2.IBM DB2
+3.MySQL
+4.PostgreSQL
+5.Oracle 
+6.MS SQL Server
+
+Database-->tables-->data-->Rows & Columns
+
+table --> Employee
+
+emp_id  emp_name    emp_dept    emp_age     emp_gender
+1        john       Ui Dev.     26          male
+2       Siddhesh    Tester      25          male
+3       Sanjivani   Tester      24          female
+4       Rajat       Java Dev    26          male
+5       saloni      Data Sci.   26          male
+
+
+Data types
+1.data type of column defines what value the column can store in table
+2.defined while creating tables in database
+3.mainly classify in three catagories
+String: char , varchar
+Numeric: int, float, bool
+Date & Time: date, datetime
+
+*Commenly used datatype
+int
+float
+bool
+char: fixed length string that can contain numbers,letters,and special symbols
+varchar : variable length string that can contain numbers, letters,and special symbols.
+date: date format. yyyy-mm-dd 
+datetime: date and time combination, yyyy-mm-dd hh:mm:ss 
+
+Primary and Foreign keys
+
+Primary keys:is a unique column we set in a table to easily identify and locate data in queries.
+
+a table can have only one Primary key, which should be unique and not null.
+
+Foreign key:
+is a column used to link two or more tables together .
+a table can have any number of Foreign keys, can contain duplicate value & Null value.
+
+
+Constraints : 
+
+are used to specify rules for data in a table.
+this ensure the accuracy and reliability of the data in the table.
+can be specified when the table is created with the crate table statements
+
+syntax:
+
+create table table_name(
+    column1 datatype constraints,
+     column2 datatype constraints,
+     column2 datatype constraints
+);
+
+e.g:
+create table Employee(
+    empid int not null,
+    empname varchar(255) not null,
+    emp_salary numeric 
+);
+
+Commonly used constraints
+1. NOT Null
+2. unique
+3. Primary key
+4. Foreign key
+5. CHECK
+6. DEFAULT--> sets a default value for a column if no value is specified.
+7. create index 
+
+
